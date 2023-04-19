@@ -131,6 +131,7 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:background="@drawable/btn_bg"
+        android:backgroundTint="@color/purple_500"
         android:fontFamily="@font/poppins_medium"
         android:text="Sign in"
         android:textAlignment="center"
