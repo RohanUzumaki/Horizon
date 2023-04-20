@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText edEmail, edPassword;
-    EditText edConfirmPassword, edFirstName, edLastName;
+    EditText edConfirmPassword, edFirstName, edLastName, edPhone;
     Button btn;
     TextView tv;
     @Override
@@ -27,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
         edConfirmPassword = findViewById(R.id.editTextConfirmPassword);
         edFirstName = findViewById(R.id.editTextFirstName);
         edLastName = findViewById(R.id.editTextLastName);
+        edPhone = findViewById(R.id.editTextPhone);
         btn = findViewById(R.id.buttonRegister);
         tv = findViewById(R.id.textViewExistingUser);
 
@@ -45,13 +46,15 @@ public class RegisterActivity extends AppCompatActivity {
                 String confirm_password = edConfirmPassword.getText().toString();
                 String first_name = edFirstName.getText().toString();
                 String last_name = edLastName.getText().toString();
+                String phone = edPhone.getText().toString();
                 Database db = new Database(getApplicationContext(), "Horizon",null, 1);
                 if (email.length() == 0 || password.length() == 0 || confirm_password.length() == 0 || first_name.length() == 0 || last_name.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
                 } else {
                    if(password.compareTo(confirm_password)==0){
                        if(isValid(password)){
-                           db.register(first_name,last_name,email,password);
+
+                           db.register(first_name,last_name,phone,email,password);
 
                            Toast.makeText(getApplicationContext(),"Record Inserted",Toast.LENGTH_SHORT).show();
                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
