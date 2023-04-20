@@ -47,14 +47,13 @@ public class RegisterActivity extends AppCompatActivity {
                 String first_name = edFirstName.getText().toString();
                 String last_name = edLastName.getText().toString();
                 String phone = edPhone.getText().toString();
-                Database db = new Database(getApplicationContext(), "Horizon",null, 1);
                 if (email.length() == 0 || password.length() == 0 || confirm_password.length() == 0 || first_name.length() == 0 || last_name.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
                 } else {
                    if(password.compareTo(confirm_password)==0){
                        if(isValid(password)){
 
-                           db.register(first_name,last_name,phone,email,password);
+
 
                            Toast.makeText(getApplicationContext(),"Record Inserted",Toast.LENGTH_SHORT).show();
                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
