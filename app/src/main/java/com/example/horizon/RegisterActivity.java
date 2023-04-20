@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,11 +45,13 @@ public class RegisterActivity extends AppCompatActivity {
                 String confirm_password = edConfirmPassword.getText().toString();
                 String first_name = edFirstName.getText().toString();
                 String last_name = edLastName.getText().toString();
+                Database db = new Database(getApplicationContext(), "Horizon",null, 1);
                 if (email.length() == 0 || password.length() == 0 || confirm_password.length() == 0 || first_name.length() == 0 || last_name.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
                 } else {
                    if(password.compareTo(confirm_password)==0){
                        if(isValid(password)){
+                           db.register(first_name,last_name,email,password);
 
                            Toast.makeText(getApplicationContext(),"Record Inserted",Toast.LENGTH_SHORT).show();
                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
