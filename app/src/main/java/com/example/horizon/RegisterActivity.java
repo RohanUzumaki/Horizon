@@ -2,7 +2,6 @@ package com.example.horizon;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,13 +16,12 @@ public class RegisterActivity extends AppCompatActivity {
     EditText edConfirmPassword, edFirstName, edLastName;
     Button btn;
     TextView tv;
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        edEmail = findViewById(R.id.editTextLoginEmailAddress);
+        edEmail = findViewById(R.id.editTextRegEmailAddress);
         edPassword = findViewById(R.id.editTextRegPassword);
         edConfirmPassword = findViewById(R.id.editTextConfirmPassword);
         edFirstName = findViewById(R.id.editTextFirstName);
@@ -49,19 +47,19 @@ public class RegisterActivity extends AppCompatActivity {
                 if (email.length() == 0 || password.length() == 0 || confirm_password.length() == 0 || first_name.length() == 0 || last_name.length() == 0) {
                     Toast.makeText(getApplicationContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(password.compareTo(confirm_password)==0){
-                        if(isValid(password)){
+                   if(password.compareTo(confirm_password)==0){
+                       if(isValid(password)){
 
-                            Toast.makeText(getApplicationContext(),"Record Inserted",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"Password must contain at least 8 characters, having letter, digit and special symbol",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(),"Password and Confirm Password does not match", Toast.LENGTH_SHORT).show();
-                    }
+                           Toast.makeText(getApplicationContext(),"Record Inserted",Toast.LENGTH_SHORT).show();
+                           startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                       }
+                       else{
+                           Toast.makeText(getApplicationContext(),"Password must contain at least 8 characters, having letter, digit and special symbol",Toast.LENGTH_SHORT).show();
+                       }
+                   }
+                   else{
+                       Toast.makeText(getApplicationContext(),"Password and Confirm Password does not match", Toast.LENGTH_SHORT).show();
+                   }
 
                 }
             }
