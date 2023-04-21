@@ -1,21 +1,17 @@
 package com.example.horizon;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -24,10 +20,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText edEmail, edPassword;
     Button btn;
     TextView tv;
-    String emailPattern = "[a-zA-Z0-9_-]+@[a-z]+\\.+[a-z]+";
-    String email;
-    String password;
-    ProgressDialog progressDialog;
+    ProgressBar progressBar;
+
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     @Override
@@ -39,76 +33,59 @@ public class LoginActivity extends AppCompatActivity {
         edPassword = findViewById(R.id.editTextLoginPassword);
         btn = findViewById(R.id.buttonLogin);
         tv = findViewById(R.id.textViewNewUser);
-        progressDialog=new ProgressDialog(this );
+
         mAuth=FirebaseAuth.getInstance();
         mUser= mAuth.getCurrentUser();
 
 
 
-        btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-                    public void onClick(View view) {
-                String email = edEmail.getText().toString();
-                String password = edPassword.getText().toString();
-                if (email.length() == 0 || password.length() == 0) {
-                    Toast.makeText(getApplicationContext(), "Please fill all details", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }
-        });
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                perforLogin();
-
-            }
-        });
+        btn.setOnClickListener(view -> userLogin());
+        tv.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
     }
 
-    private void perforLogin() {
-        String email = edEmail.getText().toString();
-        String password = edPassword.getText().toString();
-
-        if(!email.matches(emailPattern))
-        {
-            edEmail.setError(("Enter Correct Email"));
-
-        } else if (password.isEmpty()  || password.length()<6)
-        {
-            edPassword.setError("Enter Proper Password");
-        }
-        }
-        {
-            progressDialog.setMessage("Please Wait While Login...");
-            progressDialog.setTitle("Login");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
-
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful())
-                    {
-                        progressDialog.dismiss();
-                        sendUserToNextActivity();
-                        Toast.makeText(LoginActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-            });
-    }
 
     private void sendUserToNextActivity() {
         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+    private void userLogin() {
+        String EditTextEmail = edEmail.getText().toString().trim();
+        String EditTextPassword = edPassword.getText().toString().trim();
+
+        if (EditTextEmail.isEmpty()){
+            edEmail.setError("Email is required");
+            edEmail.requestFocus();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(EditTextEmail).matches()){
+            edEmail.setError("Enter a valid Email");
+            edEmail.requestFocus();
+            return;
+        }
+        if(EditTextPassword.isEmpty()){
+            edPassword.setError("Password is required");
+            edPassword.requestFocus();
+            return;
+        }
+        if (EditTextPassword.length() < 8){
+            edPassword.setError("Password length must be at least 8 characters");
+            edPassword.requestFocus();
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        mAuth.signInWithEmailAndPassword(EditTextEmail,EditTextPassword).addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                sendUserToNextActivity();
+            }
+            else{
+                Toast.makeText(LoginActivity.this,"Check your credentials", Toast.LENGTH_LONG).show();
+            }
+            progressBar.setVisibility(View.GONE);
+        });
+    }
 }
+
