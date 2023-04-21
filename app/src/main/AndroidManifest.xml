@@ -16,7 +16,7 @@
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:label="Login" />
@@ -24,7 +24,7 @@
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.Main" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
