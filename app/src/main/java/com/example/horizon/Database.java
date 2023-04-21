@@ -21,7 +21,6 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 
     public void register(String first_name, String last_name, String phone, String email, String password) {
@@ -34,6 +33,5 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.insert("users", null, cv);
         db.close();
-
     }
 }
