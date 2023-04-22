@@ -22,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextView tv;
     String emailPattern = "[a-zA-Z0-9_.]+@[a-z]+\\.+[a-z]+";
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance("https://horizon-421c9-default-rtdb.asia-southeast1.firebasedatabase.app/");
+    FirebaseDatabase database = FirebaseDatabase.getInstance("https://horizon-61340-default-rtdb.firebaseio.com/");
     DatabaseReference myRef = database.getReference();
     FirebaseAuth mAuth;
     FirebaseUser mUser;
@@ -61,7 +61,6 @@ public class RegisterActivity extends AppCompatActivity {
         if(!email.matches(emailPattern))
         {
             edEmail.setError(("Enter Correct Email"));
-
         } else if (password.isEmpty()  || password.length()<6)
         {
             edPassword.setError("Enter Proper Password");
@@ -74,10 +73,9 @@ public class RegisterActivity extends AppCompatActivity {
                 if(task.isSuccessful())
                 {
                     Patient patient = new Patient(FirstName,LastName,Phone,email);
-                    myRef.child("Patient").child(FirstName+Phone).setValue(patient).addOnCompleteListener(task1 -> {
+                    myRef.child("Patient").child("Rohan").setValue(patient).addOnCompleteListener(task1 -> {
                         if(task1.isSuccessful()){
                             Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                            sendUserToNextActivity();
                         }
                         else {
                             Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();

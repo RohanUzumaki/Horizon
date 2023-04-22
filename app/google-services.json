@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "518378406866",
-    "project_id": "horizon-421c9",
-    "storage_bucket": "horizon-421c9.appspot.com"
+    "project_number": "547658722431",
+    "firebase_url": "https://horizon-61340-default-rtdb.firebaseio.com",
+    "project_id": "horizon-61340",
+    "storage_bucket": "horizon-61340.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:518378406866:android:8bd18783ea93d259e3fe0b",
+        "mobilesdk_app_id": "1:547658722431:android:4fd3c037ab2ca975a7234a",
         "android_client_info": {
           "package_name": "com.example.horizon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "518378406866-hm0n3n8r3br7vam0olq0v5j5aiakscnc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.horizon",
-            "certificate_hash": "10bb1b0bebbf94c57f9526e7e141d8013e6848e1"
-          }
-        },
-        {
-          "client_id": "518378406866-41earscl0mg088p6kmmtquns0ck8purh.apps.googleusercontent.com",
+          "client_id": "547658722431-io8ot3u7fmm808tb93457o34to2hq38a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCBZeY-HvRVq9lbvWycq8kfHZeBv1UxUC4"
+          "current_key": "AIzaSyAH16XPzqnZ63i8o-MpXk4QBG0l0mFvAhc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "518378406866-41earscl0mg088p6kmmtquns0ck8purh.apps.googleusercontent.com",
+              "client_id": "547658722431-io8ot3u7fmm808tb93457o34to2hq38a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
